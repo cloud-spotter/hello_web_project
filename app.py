@@ -1,10 +1,83 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, Response
 
 # Create a new Flask app
 app = Flask(__name__)
 
 # == Your Routes Here ==
+
+# Request:
+# GET /hello?name=David
+@app.route('/hello', methods=['GET'])
+def hello():
+    name = request.args['name']
+
+    #Send back friendly greeting with the name
+    return f"Hello {name}"
+
+#Request:
+# POST /goodbye
+#   With body parameter: name=Alice
+
+@app.route('/goodbye', methods=['POST'])
+def goodbye(): 
+    name = request.form['name'] 
+    # Send back friendly farewell with the name
+    return f"Goodbye {name}!"
+
+#Request
+@app.route('/introduction', methods=['POST'])
+def introduction():
+    name = request.form['name']
+    meet = request.form['meet']
+
+    return f"Hi {name}! I'd like to introduce you to {meet}"
+
+#Request
+@app.route('/submit', methods=['POST'])
+def submit():
+    name = request.form['name']
+    message = request.form['message']
+    return f'Thanks {name}, you sent this message: {message}'
+
+#Request (02 Building routes: Challenge)
+@app.route('/wave', methods=['GET'])
+def wave():
+    name = request.args['name']
+    return f'I am waving at {name}'
+
+#Request (03 Test-driving a route: Exercise One)
+@app.route('/count_vowels', methods=['POST'])
+def count_vowels():
+    vowels = 'aeiou'
+    count = 0
+    text = request.form['text'] 
+    for char in text:
+        if char in vowels:
+            count += 1
+    return f'There are {count} vowels in "{text}"'
+
+#Request (03 Test-driving a route: Exercise Two)
+@app.route('/sort-names', methods=["POST"])
+def sort_names():
+    # text = request.form['text']
+    # split_text = text.split(",")
+    # split_text.sort()
+    # split_text_as_string = (',').join(split_text)
+    # return split_text_as_string
+    
+    # 400 RESPONSE FOR NONE PARAMETER (NEEDED PEER HELP)
+    text = request.form['text']
+    if text == '':
+        return Response("Please provide a list of strings (comma-separated)", status=400)
+    else:
+        split_text = text.split(",")
+        split_text.sort()
+        split_text_as_string = (',').join(split_text)
+        return split_text_as_string
+
+
+
 
 # == Example Code Below ==
 
