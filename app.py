@@ -76,6 +76,15 @@ def sort_names():
         split_text_as_string = (',').join(split_text)
         return split_text_as_string
 
+#Request (03 Test-driving a route: CHallenge)
+@app.route('/name', methods=["GET"])
+def add_name():
+    predefined_names = ["Julia,Alice,Karim"]
+    added_name = request.args.get('add')
+    if added_name:
+        predefined_names.append(added_name)
+    return ",".join(predefined_names)
+
 
 
 

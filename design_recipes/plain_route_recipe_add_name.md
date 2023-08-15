@@ -1,4 +1,4 @@
-# {{ NAME }} Route Design Recipe
+# {{ Add Name }} Route Design Recipe
 
 _Copy this design recipe template to test-drive a plain-text Flask route._
 
@@ -7,18 +7,10 @@ _Copy this design recipe template to test-drive a plain-text Flask route._
 _Include the HTTP method, the path, and any query or body parameters._
 
 ```
-# EXAMPLE
+# Add name
+GET /names?add=Eddie
+  names: string (Comma-separated)
 
-# Home route
-GET /home
-
-# Waving route
-GET /wave?name=<string>
-
-# Submit message route
-POST /submit
-  name: string
-  message: string
 ```
 
 ## 2. Create Examples as Tests
@@ -30,41 +22,15 @@ _Remember to try out different parameter values._
 _Include the status code and the response body._
 
 ```python
-# EXAMPLE
 
-# GET /home
-#  Expected response (200 OK):
+'''
+# GET /names?add=Eddie
+#   Expected response (200 OK)
+'''
 """
-This is my home page!
-"""
-
-# GET /wave?name=Leo
-#  Expected response (200 OK):
-"""
-I am waving at Leo
+Julia, Alice, Karim, Eddie
 """
 
-# GET /wave
-#  Expected response (200 OK):
-"""
-I am waving at no one!
-"""
-
-# POST /submit
-#  Parameters:
-#    name: Leo
-#    message: Hello world
-#  Expected response (200 OK):
-"""
-Thanks Leo, you sent this message: "Hello world"
-"""
-
-# POST /submit
-#  Parameters: none
-#  Expected response (400 Bad Request):
-"""
-Please provide a name and a message
-"""
 ```
 
 ## 3. Test-drive the Route
